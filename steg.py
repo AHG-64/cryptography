@@ -43,29 +43,29 @@ def setLSB(n,t):
 			return n+1
 		return n
 
-def encode(message,pix,w,h):
+def encode(message,pix,width,height):
 	code=str2bin(message)
-	p=0
-	while p<len(code):
-		i=p%w
-		j=p//w
+	Point=0
+	while point<len(code):
+		i=point%width
+		j=point//width
 		temp=list(pix[i,j])
 		temp[0]=setLSB(temp[0],int(code[p]))
 		pix[i,j]=tuple(temp)
-		p+=1
+		point+=1
 	# key
 	# n8b : num of 8bits
-	n8b=dec2bin(p//8).zfill(10)
+	n8b=dec2bin(point//8).zfill(10)
 	counter=0
-	p=h*w-1
+	point=height*width-1
 	while counter<10:
-		i=p%w
-		j=p//w
+		i=point%width
+		j=point//width
 		temp=list(pix[i,j])
 		temp[0]=setLSB(temp[0],int(n8b[counter]))
 		pix[i,j]=tuple(temp)
 		counter+=1
-		p-=1
+		point-=1
 	print('completed!')
 def decode():
 	pass
