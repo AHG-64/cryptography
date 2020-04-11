@@ -1,5 +1,6 @@
 #!/bin/python3
 import sys
+from PIL import Image
 #()10 -----> ()2
 def dec2bin():
 	pass
