@@ -33,15 +33,15 @@ def str2bin():
 def bin2str():
 	pass
 
-def setLSB(n,t):
-	if t==0:
-		if n%2==0:
-			return n
-		return n-1
+def setLSB(number,bit):
+	if bit==0:
+		if number%2==0:
+			return number
+		return number-1
 	else:
-		if n%2==0:
-			return n+1
-		return n
+		if number%2==0:
+			return number+1
+		return number
 
 def encode(message,pix,width,height):
 	code=str2bin(message)
