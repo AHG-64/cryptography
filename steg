@@ -1,12 +1,31 @@
 #!/bin/python3
 import sys
 from PIL import Image
+from math import*
 #()10 -----> ()2
-def dec2bin():
-	pass
+def dec2bin(x):
+	l=[]
+	r=''
+	while x>0:
+		l.append(x%2)
+		x=x//2
+	l.reverse()
+	for i in range(len(l)):
+		r+=str(l[i])
+	return r
+  
 #()2 ------> ()10
-def bin2dec():
-	pass
+def bin2dec(x):
+	t=0
+	l=[]
+	s=str(x)
+	for i in range(len(s)):
+		l.append(s[i])
+	l.reverse()
+	for i in range(len(l)):
+		t+=int(pow(2,i)*int(l[i]))
+	return t
+
 #(string) ------> (binary)
 def str2bin():
 	pass
