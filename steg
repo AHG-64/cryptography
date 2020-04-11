@@ -52,6 +52,14 @@ def decode():
 	pass
 
 def main(args):
-	pass
+	option=args[1]
+	image=Image.open(args[2])
+	pix=image.load()
+	if option=='-e':
+		print('Enter your message:')
+		encode(sys.stdin.read(),pix,image.size[0],image.size[1])
+		image.save('coded.png')
+	elif option=='-d':
+		print(decode())
 if __name__=='__main__':
 	main(sys.argv)
