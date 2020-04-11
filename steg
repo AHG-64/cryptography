@@ -1,0 +1,57 @@
+#!/bin/python3
+import sys
+from PIL import Image
+#()10 -----> ()2
+def dec2bin():
+	pass
+#()2 ------> ()10
+def bin2dec():
+	pass
+#(string) ------> (binary)
+def str2bin():
+	pass
+#(binary) ------> (string)
+def bin2str():
+	pass
+
+def setLSB(n,t):
+	if t==0:
+		if n%2==0:
+			return n
+		return n-1
+	else:
+		if n%2==0:
+			return n+1
+		return n
+
+def encode(message,pix,w,h):
+	code=str2bin(message)
+	p=0
+	while p<len(code):
+		i=p%w
+		j=p//w
+		temp=list(pix[i,j])
+		temp[0]=setLSB(temp[0],int(code[p]))
+		pix[i,j]=tuple(temp)
+		p+=1
+	# key
+	# n8b : num of 8bits
+	n8b=dec2bin(p//8).zfill(10)
+	counter=0
+	p=h*w-1
+	while counter<10:
+		i=p%w
+		j=p//w
+		temp=list(pix[i,j])
+		temp[0]=setLSB(temp[0],int(n8b[counter]))
+		pix[i,j]=tuple(temp)
+		counter+=1
+		p-=1
+	print('completed!')
+def decode():
+	pass
+
+def main(args):
+	pass
+if __name__=='__main__':
+	main(sys.argv)
