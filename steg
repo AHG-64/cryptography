@@ -24,7 +24,7 @@ def bin2dec(x):
 	l.reverse()
 	for i in range(len(l)):
 		t+=int(pow(2,i)*int(l[i]))
-	return t
+	return str(t)
 
 #(string) ------> (binary)
 def str2bin():
