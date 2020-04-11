@@ -4,15 +4,15 @@ from PIL import Image
 from math import*
 #()10 -----> ()2
 def dec2bin(x):
-	l=[]
-	r=''
-	while x>0:
-		l.append(x%2)
-		x=x//2
-	l.reverse()
-	for i in range(len(l)):
-		r+=str(l[i])
-	return r
+	remainders = []
+	binaryNumber = ''
+	while x > 0:
+		remainders.append(x%2)
+		x = x//2
+	remainders.reverse()
+	for digit in range(len(remainders)):
+		binaryNumber += str(remainders[digit])
+	return binaryNumber
   
 #()2 ------> ()10
 def bin2dec(x):
