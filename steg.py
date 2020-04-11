@@ -16,15 +16,15 @@ def dec2bin(x):
   
 #()2 ------> ()10
 def bin2dec(x):
-	t=0
-	l=[]
-	s=str(x)
-	for i in range(len(s)):
-		l.append(s[i])
-	l.reverse()
-	for i in range(len(l)):
-		t+=int(pow(2,i)*int(l[i]))
-	return str(t)
+	decimalNumber = 0
+	listBinaryNumber = []
+	binaryNumber = str(x)
+	for digit in range(len(binaryNumber)):
+		listBinaryNumber.append(binaryNumber[digit])
+	listBinaryNumber.reverse()
+	for digit in range(len(listBinaryNumber)):
+		decimalNumber += int(pow(2,digit) * int(listBinaryNumber[digit]))
+	return str(decimalNumber)
 
 #(string) ------> (binary)
 def str2bin():
