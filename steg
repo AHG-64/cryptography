@@ -73,8 +73,34 @@ def encode(message, pix, width, height):
 		point -= 1
 	print('completed!')
 
-def decode():
-	pass
+def decode(pix,width,height):
+	temp = ''
+	counter = 0
+	point = height * width - 1
+	while counter < 10:
+		i = point % width
+		j = point // width
+		temp += dec2bin(pix[i,j][0])[-1]
+		counter += 1
+		p -= 1
+	# nb : num of bits
+	nb = 8 * int(bin2dec(int(temp)))
+	coded_message = ''
+	point = 0
+	while point <nb:
+		i = point%width
+		j = point//width
+		coded_message += str2bin(str(pix[i,j][0]))[-1]
+		point += 1
+	temp = ''
+	message = ''
+	for i in coded_message:
+		temp += i
+		if(len(temp) == 8):
+			message += bin2str(int(temp))
+			temp = ''
+	return message
+
 
 def main(args):
 	option = args[1]
