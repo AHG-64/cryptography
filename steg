@@ -28,7 +28,7 @@ def bin2dec(x):
 
 #(string) ------> (binary)
 def str2bin(massg):
-	asciiCharBinery = 0
+	asciiCharBinery = ''
 	for char in massg:
 		asciiCharBinery += dec2bin(ord(char)).zfill(8)
     
@@ -50,7 +50,7 @@ def setLSB(number, bit):
 
 def encode(message, pix, width, height):
 	code = str2bin(message)
-	Point = 0
+	point = 0
 	while point < len(code):
 		i = point % width
 		j = point // width
