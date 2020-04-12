@@ -35,8 +35,8 @@ def str2bin(massg):
 	return asciiCharBinery
 
 #(binary) ------> (string)
-def bin2str():
-	pass
+def bin2str(binMassge):
+	return chr(bin2dec(binMassge))
 
 def setLSB(number, bit):
 	if bit == 0:
