@@ -1,43 +1,24 @@
 #!/bin/python3
 import sys
 from PIL import Image
-from math import*
 #()10 -----> ()2
-def dec2bin(x):
-	remainders = []
-	binaryNumber = ''
-	while x > 0:
-		remainders.append(x%2)
-		x = x//2
-	remainders.reverse()
-	for digit in range(len(remainders)):
-		binaryNumber += str(remainders[digit])
-	return binaryNumber
-  
+def dec2bin(n, ans):
+	if n == 0:
+		return ans
+	return dec2bin(n//2, str(n % 2) + ans)
 #()2 ------> ()10
-def bin2dec(x):
-	decimalNumber = 0
-	listBinaryNumber = []
-	binaryNumber = str(x)
-	for digit in range(len(binaryNumber)):
-		listBinaryNumber.append(binaryNumber[digit])
-	listBinaryNumber.reverse()
-	for digit in range(len(listBinaryNumber)):
-		decimalNumber += int(pow(2, digit) * int(listBinaryNumber[digit]))
-	return str(decimalNumber)
-
+def bin2dec(n, depth, ans):
+	if depth == len(n):
+		return str(ans)
+	return bin2dec(n, depth + 1, ans + int(2 ** depth) * int(n[-depth - 1]))
 #(string) ------> (binary)
-def str2bin(massg):
-	asciiCharBinery = ''
-	for char in massg:
-		asciiCharBinery += dec2bin(ord(char)).zfill(8)
-    
-	return asciiCharBinery
-
+def str2bin(message, code = ''):
+	for i in message:
+		code += dec2bin(ord(i), '').zfill(8)
+	return code
 #(binary) ------> (string)
 def bin2str(binMassge):
-	return chr(int(bin2dec(binMassge)))
-
+	return chr(int(bin2dec(binMassge, 0, 0)))
 def setLSB(number, bit):
 	if bit == 0:
 		if number % 2 == 0:
@@ -47,7 +28,6 @@ def setLSB(number, bit):
 		if number % 2== 0:
 			return number + 1
 		return number
-
 def encode(message, pix, width, height):
 	code = str2bin(message)
 	point = 0
@@ -60,7 +40,7 @@ def encode(message, pix, width, height):
 		point += 1
 	# key
 	# n8b :  num of 8bits
-	n8b = dec2bin(point // 8).zfill(10)
+	n8b = dec2bin(point // 8,'').zfill(10)
 	counter = 0
 	point = height * width - 1
 	while counter < 10:
@@ -72,7 +52,6 @@ def encode(message, pix, width, height):
 		counter += 1
 		point -= 1
 	print('completed!')
-
 def decode(pix,width,height):
 	temp = ''
 	counter = 0
@@ -80,11 +59,11 @@ def decode(pix,width,height):
 	while counter < 10:
 		i = point % width
 		j = point // width
-		temp += dec2bin(pix[i,j][0])[-1]
+		temp += dec2bin(pix[i,j][0],'')[-1]
 		counter += 1
 		point -= 1
 	# nb : num of bits
-	nb = 8 * int(bin2dec(int(temp)))
+	nb = 8 * int(bin2dec(temp,0,0))
 	coded_message = ''
 	point = 0
 	while point <nb:
@@ -97,11 +76,9 @@ def decode(pix,width,height):
 	for i in coded_message:
 		temp += i
 		if(len(temp) == 8):
-			message += bin2str(int(temp))
+			message += bin2str(temp)
 			temp = ''
 	return message
-
-
 def main(args):
 	option = args[1]
 	image = Image.open(args[2])
@@ -109,8 +86,8 @@ def main(args):
 	if option == '-e':
 		print('Enter your message:')
 		encode(sys.stdin.read(), pix,image.size[0], image.size[1])
-		image.save('coded.png')
+		image.save('coded_image.png')
 	elif option == '-d':
-		print(decode(pix,image.size[0],image.size[1]))
+		print(decode(pix, image.size[0], image.size[1]))
 if __name__ == '__main__':
 	main(sys.argv)
