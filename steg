@@ -27,11 +27,16 @@ def bin2dec(x):
 	return str(decimalNumber)
 
 #(string) ------> (binary)
-def str2bin():
-	pass
+def str2bin(massg):
+	asciiCharBinery = ''
+	for char in massg:
+		asciiCharBinery += dec2bin(ord(char)).zfill(8)
+    
+	return asciiCharBinery
+
 #(binary) ------> (string)
-def bin2str():
-	pass
+def bin2str(binMassge):
+	return chr(bin2dec(binMassge))
 
 def setLSB(number, bit):
 	if bit == 0:
@@ -39,13 +44,13 @@ def setLSB(number, bit):
 			return number
 		return number - 1
 	else:
-		if numbe r%2== 0:
+		if number % 2== 0:
 			return number + 1
 		return number
 
 def encode(message, pix, width, height):
 	code = str2bin(message)
-	Point = 0
+	point = 0
 	while point < len(code):
 		i = point % width
 		j = point // width
@@ -67,33 +72,35 @@ def encode(message, pix, width, height):
 		counter += 1
 		point -= 1
 	print('completed!')
+
 def decode(pix,width,height):
-	temp=''
-	counter=0
-	point=height*width-1
-	while counter<10:
-		i=point%width
-		j=point//width
-		temp+=dec2bin(pix[i,j][0])[-1]
-		counter+=1
-		p-=1
+	temp = ''
+	counter = 0
+	point = height * width - 1
+	while counter < 10:
+		i = point % width
+		j = point // width
+		temp += dec2bin(pix[i,j][0])[-1]
+		counter += 1
+		p -= 1
 	# nb : num of bits
-	nb=8*int(bin2dec(int(temp)))
-	coded_message=''
-	point=0
-	while point<nb:
-		i=point%width
-		j=point//width
-		coded_message+=str2bin(str(pix[i,j][0]))[-1]
-		point+=1
-	temp=''
-	message=''
+	nb = 8 * int(bin2dec(int(temp)))
+	coded_message = ''
+	point = 0
+	while point <nb:
+		i = point%width
+		j = point//width
+		coded_message += str2bin(str(pix[i,j][0]))[-1]
+		point += 1
+	temp = ''
+	message = ''
 	for i in coded_message:
-		temp+=i
-		if(len(temp)==8):
-			message+=bin2str(int(temp))
-			temp=''
+		temp += i
+		if(len(temp) == 8):
+			message += bin2str(int(temp))
+			temp = ''
 	return message
+
 
 def main(args):
 	option = args[1]
