@@ -27,8 +27,13 @@ def bin2dec(x):
 	return str(decimalNumber)
 
 #(string) ------> (binary)
-def str2bin():
-	pass
+def str2bin(massg):
+	asciiCharBinery = 0
+	for char in massg:
+		asciiCharBinery += dec2bin(ord(char)).zfill(8)
+    
+	return asciiCharBinery
+
 #(binary) ------> (string)
 def bin2str():
 	pass
@@ -39,7 +44,7 @@ def setLSB(number, bit):
 			return number
 		return number - 1
 	else:
-		if numbe r%2== 0:
+		if number % 2== 0:
 			return number + 1
 		return number
 
@@ -67,6 +72,7 @@ def encode(message, pix, width, height):
 		counter += 1
 		point -= 1
 	print('completed!')
+
 def decode():
 	pass
 
