@@ -86,7 +86,7 @@ def main(args):
 	if option == '-e':
 		print('Enter your message:')
 		encode(sys.stdin.read(), pix,image.size[0], image.size[1])
-		image.save('coded_image.png')
+		image.save('coded_image.%s'%image.format.lower())
 	elif option == '-d':
 		print(decode(pix, image.size[0], image.size[1]))
 if __name__ == '__main__':
