@@ -2,12 +2,12 @@
 import sys
 from PIL import Image
 #()10 ------> ()2
-def dec2bin(n, ans):
+def dec2bin(n, ans=''):
 	if n == 0:
 		return ans
 	return dec2bin(n//2, str(n % 2) + ans)
 #()2 ------> ()10
-def bin2dec(n, depth, ans):
+def bin2dec(n, depth=0, ans=0):
 	if depth == len(n):
 		return str(ans)
 	return bin2dec(n, depth + 1, ans + int(2 ** depth) * int(n[-depth - 1]))
@@ -40,7 +40,7 @@ def encode(message, pix, width, height):
 		point += 1
 	# key
 	# n8b :  num of 8bits
-	n8b = dec2bin(point // 8,'').zfill(10)
+	n8b = dec2bin(point // 8).zfill(10)
 	counter = 0
 	point = height * width - 1
 	while counter < 10:
@@ -59,11 +59,11 @@ def decode(pix,width,height):
 	while counter < 10:
 		i = point % width
 		j = point // width
-		temp += dec2bin(pix[i,j][point % 3],'')[-1]
+		temp += dec2bin(pix[i,j][point % 3])[-1]
 		counter += 1
 		point -= 1
 	# nb : num of bits
-	nb = 8 * int(bin2dec(temp,0,0))
+	nb = 8 * int(bin2dec(temp))
 	coded_message = ''
 	point = 0
 	while point <nb:
